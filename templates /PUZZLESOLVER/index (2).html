@@ -1,0 +1,539 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle Solver AI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+            /* background-image: url('templates/kendal-hnysCJrPpkc-unsplash.jpg'); */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: transparent;
+        }
+
+        #chat-container {
+            display: none;
+            width: 50%;
+            max-width: 800px;
+            /* background-color: rgba(255, 255, 255, 0.8); */
+            padding: 10px 20px;
+            border-radius: 10px;
+            /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+            overflow-y: auto;
+            transition: all 0.5s ease;
+            margin-bottom: 20px;
+            transform: translateY(-10px);
+            position: relative;
+            left: 20px;
+        }
+
+        #input-container {
+            position: absolute;
+            bottom: 10%;
+            left: 25%;
+            width: 80%;
+            max-width: 800px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            z-index: 1000;
+            transition: all 0.5s ease;
+        }
+
+        .input-box-wrapper {
+            position: relative;
+            display: flex;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .input-box-wrapper:hover {
+            transform: rotateY(10deg) rotateX(5deg);
+        }
+
+        textarea {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 25px;
+            border: 2px solid #ddd;
+            outline: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            resize: none;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            max-height: 80px;
+        }
+
+        textarea:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            padding: 12px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.2s ease;
+            transform: scale(1);
+        }
+
+        button:hover {
+            transform: scale(1.2);
+            background-color: #f0f0f0;
+            border-radius: 50%;
+        }
+
+        button i {
+            font-size: 24px;
+            color: #4CAF50;
+        }
+
+        .message {
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #e1e1e1;
+            border-radius: 5px;
+            width: fit-content;
+            max-width: 90%;
+        }
+
+        .bot-message {
+            background-color: #d1e7dd;
+            align-self: flex-start;
+        }
+
+        .user-message {
+            background-color: #f9f8f8;
+            text-align: right;
+            border-color: #4CAF50;
+            border-width: 2px;
+            border-style: solid;
+            border-radius: 15%;
+            align-self: flex-end;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>SIMPLO</h1>
+    
+    <div id="chat-container"></div>
+
+    <div id="input-container">
+        <div class="input-box-wrapper">
+            <textarea id="user-input" placeholder="Type your puzzle here..." oninput="autoResizeTextArea()"></textarea>
+            <button onclick="sendMessage()">
+                <i>🔍</i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let firstMessageSent = false;
+
+        function addMessage(content, sender) {
+            const messageElement = document.createElement("div");
+            messageElement.classList.add("message");
+            messageElement.classList.add(sender === "user" ? "user-message" : "bot-message");
+            messageElement.textContent = content;
+            document.getElementById("chat-container").appendChild(messageElement);
+        }
+
+        function sendMessage() {
+            const userInput = document.getElementById("user-input").value;
+            if (userInput.trim() === "") return;
+
+            addMessage(userInput, "user");
+
+            fetch('/generate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ 'input_text': userInput })
+            })
+            .then(response => response.json())
+            .then(data => {
+                addMessage(data.response, "bot");
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+            document.getElementById("user-input").value = "";
+
+            if (!firstMessageSent) {
+                firstMessageSent = true;
+                document.getElementById("chat-container").style.display = "block";
+            }
+
+            const inputContainer = document.getElementById("input-container");
+
+            inputContainer.style.marginTop = "5px";
+
+            setTimeout(function() {
+                inputContainer.style.marginTop = "20px";
+            }, 300);
+
+            autoResizeTextArea();
+        }
+
+        function autoResizeTextArea() {
+            const textArea = document.getElementById("user-input");
+            textArea.style.height = "auto";
+            textArea.style.height = (textArea.scrollHeight) + "px";
+            if (textArea.scrollHeight > 80) {
+                textArea.style.height = "80px";
+            }
+        }
+
+        document.getElementById("user-input").addEventListener("keydown", function(event) {
+            if (event.key === "Enter" && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        });
+    </script>
+
+</body>
+</html>  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Puzzle Solver AI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+            background-color: black;
+            color: white;
+            animation: fadeIn 2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        h1 {
+            font-size: 66px;
+            text-align: center;
+            color: black;
+            margin-bottom: 90px;
+            font-weight: bold;
+            animation: slideIn 1s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateY(-50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        #chat-container {
+            display: contents;
+            width: 50%;
+            max-width: 800px;
+            /* background-color: rgba(0, 0, 0, 0.8); */
+            background-color: rgba(0, 0, 0, 0.363);
+            padding: 10px 20px;
+            border-radius: 20px;
+            border-color: #4CAF50;
+            border-style: dashed;
+            overflow-y: auto;
+            height: 300px;
+            transition: all 0.5s ease;
+            margin-bottom: 65px;
+            transform: translateY(-10px);
+            position: relative;
+            left: 20px;
+            opacity: 0;
+            animation: fadeInChat 1s forwards, slideUp 1s ease-out 0.5s;
+        }
+
+        @keyframes fadeInChat {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(20px); }
+            100% { transform: translateY(0); }
+        }
+
+        #input-container {
+            position: absolute;
+            bottom: 10%;
+            left: 25%;
+            width: 80%;
+            max-width: 800px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            z-index: 1000;
+        }
+
+        .input-box-wrapper {
+            position: relative;
+            display: flex;
+            width: 100%;
+            justify-content: center;
+        }
+
+        textarea {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 25px;
+            border: 2px solid #ddd;
+            outline: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            resize: none;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            max-height: 80px;
+            color: white;
+            background-color: #333;
+        }
+
+        textarea:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            background-color: #444;
+        }
+
+        button {
+            padding: 12px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.2s ease;
+        } 
+
+         /* button:hover {
+            transform: scale(1.2);
+            background-color: #444;
+            border-radius: 50%;
+        } */
+
+        /* button i {
+            font-size: 24px;
+            color: #1c1919;
+        } */
+
+        .message {
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #444;
+            border-radius: 5px;
+            width: fit-content;
+            max-width: 90%;
+        }
+
+        .bot-message {
+            background-color: #333;
+            align-self: flex-start;
+        }
+
+        .user-message {
+            background-color: #555;
+            text-align: right;
+            border-color: #4CAF50;
+            border-width: 2px;
+            border-style: solid;
+            border-radius: 15%;
+            align-self: flex-end;
+        }
+
+        /* Custom Scrollbar */
+        #chat-container {
+            scrollbar-width: thin;
+            scrollbar-color: #4CAF50 #333;
+        }
+
+        #chat-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #chat-container::-webkit-scrollbar-thumb {
+            background-color: #4CAF50;
+            border-radius: 5px;
+        }
+
+        #chat-container::-webkit-scrollbar-track {
+            background-color: #333;
+        }
+        #name{
+            font-size: 1.2rem;
+            color:black;
+            position: absolute;
+            top:0;
+            right:1;
+        }
+
+    </style>
+</head>
+<body class="bg-[url('https://www.cloudberries.co.uk/wp-content/uploads/2022/01/1000-piece-puzzle-how-long.jpg')] w-screen h-screen relative">
+
+    <h1 class="">MAZE</h1>
+    <!-- <img src="./Lovely_Professional_University_logo.png" alt="LPU Logo" id="logo" class="text-xl h-30 absolute top-3 left-3"> -->
+    <img src="{{ url_for('static', filename='images/Lovely_Professional_University_logo.png') }}" alt="LPU Logo" id="logo" class="text-xl h-30 absolute top-3 left-3">
+    <div class="flex flex-col-reverse absolute top-3 right-3 bg-black rounded-xl px-3 py-3 shadow shadow-green-900 shadow-xl hover:scale-105">
+        <p>Jitin(12300937)</p>
+        <p>Soumya Suresh(12311687)</p>
+        <p>Priyanshu Raghuvanshi(12322741)</p>
+    </div>
+    
+    <div id="chat-container"></div>
+
+    <div id="input-container">
+        <div class="input-box-wrapper">
+            <textarea id="user-input" placeholder="Type your puzzle here..." oninput="autoResizeTextArea()"></textarea>
+            <button id="send-button" onclick="sendMessage()" class="text-green cursor-pointer">
+                <i class="fa-solid fa-magnifying-glass text-black text-2xl hover:scale-120" ></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let firstMessageSent = false;
+
+        // Function to add messages to the chat container
+        function addMessage(content, sender) {
+            const messageElement = document.createElement("div");
+            messageElement.classList.add("message");
+            messageElement.classList.add(sender === "user" ? "user-message" : "bot-message");
+            messageElement.textContent = content;
+            document.getElementById("chat-container").appendChild(messageElement);
+
+            // Scroll to the bottom of the chat container
+            const chatContainer = document.getElementById("chat-container");
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Function to handle message sending
+        function sendMessage() {
+            const userInput = document.getElementById("user-input").value;
+            if (userInput.trim() === "") return;
+
+            // Disable input and button while waiting for the AI response
+            disableInput();
+
+            addMessage(userInput, "user");
+
+            fetch('/generate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ 'input_text': userInput })
+            })
+            .then(response => response.json())
+            .then(data => {
+                addMessage(data.response, "bot");
+                enableInput(); // Enable input after the AI response
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                enableInput(); // Re-enable input if there's an error
+            });
+
+            document.getElementById("user-input").value = "";
+
+            if (!firstMessageSent) {
+                firstMessageSent = true;
+                document.getElementById("chat-container").style.display = "block";
+            }
+
+            const inputContainer = document.getElementById("input-container");
+
+            inputContainer.style.marginTop = "5px";
+
+            setTimeout(function() {
+                inputContainer.style.marginTop = "20px";
+            }, 300);
+
+            autoResizeTextArea();
+        }
+
+        // Function to disable input and button
+        function disableInput() {
+            document.getElementById("user-input").disabled = true;
+            document.getElementById("send-button").disabled = true;
+        }
+
+        // Function to enable input and button
+        function enableInput() {
+            document.getElementById("user-input").disabled = false;
+            document.getElementById("send-button").disabled = false;
+        }
+
+        // Function to auto resize the textarea
+        function autoResizeTextArea() {
+            const textArea = document.getElementById("user-input");
+            textArea.style.height = "auto";
+            textArea.style.height = (textArea.scrollHeight) + "px";
+            if (textArea.scrollHeight > 80) {
+                textArea.style.height = "80px";
+            }
+        }
+
+        // Handle Enter key for submitting the message
+        document.getElementById("user-input").addEventListener("keydown", function(event) {
+            if (event.key === "Enter" && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        });
+    </script>
+
+</body>
+</html>

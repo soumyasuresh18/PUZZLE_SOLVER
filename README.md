@@ -12,9 +12,9 @@ API Used: Google Gemini API (for NLP and puzzle solving)
 
 Libraries:
 
-NLP Libraries (e.g., spaCy, NLTK if using Python)
+NLP Libraries 
 
-HTTP libraries for API calls (e.g., requests, HttpURLConnection)
+HTTP libraries for API calls 
 
 Features:
 Understands riddles and logic-based questions using NLP.
